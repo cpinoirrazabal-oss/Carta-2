@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Para Katty 🌷</title>
+
+<!-- Tipografía romántica -->
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== BASE ===== */
+
+body {
+
+margin: 0;
+overflow: hidden;
+
+font-family: 'Playfair Display', serif;
+
+background: linear-gradient(
+to top,
+#ff9a9e,
+#fad0c4,
+#fad0c4
+);
+
+color: #5a3e36;
+
+transition: background 2s;
+
+}
+
+/* ===== ESCENAS ===== */
+
+.scene {
+
+position: absolute;
+width: 100%;
+height: 100%;
+
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+
+text-align: center;
+
+opacity: 0;
+pointer-events: none;
+
+transition: opacity 1.5s;
+
+padding: 20px;
+
+}
+
+.scene.active {
+
+opacity: 1;
+pointer-events: auto;
+
+}
+
+/* ===== TEXTO ===== */
+
+.text {
+
+font-family: 'Great Vibes', cursive;
+
+font-size: 2.3em;
+
+max-width: 85%;
+
+line-height: 1.6;
+
+}
+
+/* ===== BOTÓN ===== */
+
+button {
+
+margin-top: 30px;
+
+padding: 14px 32px;
+
+font-size: 1em;
+
+border: none;
+
+border-radius: 30px;
+
+background: #ff6fa5;
+
+color: white;
+
+cursor: pointer;
+
+transition: 0.3s;
+
+}
+
+button:hover {
+
+background: #ff3f87;
+
+}
+
+/* ===== SOBRE ===== */
+
+.envelope {
+
+font-size: 90px;
+cursor: pointer;
+
+transition: transform 0.5s;
+
+}
+
+.envelope.open {
+
+transform: scale(1.4) rotate(12deg);
+
+}
+
+/* ===== CAMPO DE TULIPANES ===== */
+
+.field {
+
+position: fixed;
+
+bottom: 0;
+left: 0;
+
+width: 100%;
+height: 160px;
+
+pointer-events: none;
+
+z-index: 0;
+
+}
+
+.tulip-ground {
+
+position: absolute;
+
+bottom: 0;
+
+font-size: 26px;
+
+}
+
+/* ===== ESTRELLAS (modo noche) ===== */
+
+.star {
+
+position: absolute;
+
+font-size: 12px;
+
+opacity: 0.8;
+
+animation: twinkle 2s infinite;
+
+}
+
+@keyframes twinkle {
+
+0% { opacity: 0.2; }
+
+50% { opacity: 1; }
+
+100% { opacity: 0.2; }
+
+}
+
+/* ===== CORAZÓN ===== */
+
+.heart {
+
+position: relative;
+
+width: 320px;
+height: 320px;
+
+}
+
+/* ===== MENSAJE SECRETO ===== */
+
+.secret {
+
+display: none;
+
+font-size: 2em;
+
+animation: fadeIn 3s;
+
+}
+
+/* ===== FADE ===== */
+
+@keyframes fadeIn {
+
+from {
+opacity: 0;
+transform: translateY(30px);
+}
+
+to {
+opacity: 1;
+transform: translateY(0);
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- 🎵 AUDIO -->
+
+<audio id="music" loop>
+<source src="ojos-color-sol.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🌷 CAMPO DE TULIPANES -->
+
+<div class="field" id="field"></div>
+
+<!-- 🌷 ESCENA 1 -->
+
+<div class="scene active">
+
+<div class="text">
+
+Tengo algo especial para ti 💌
+
+</div>
+
+<div class="envelope" onclick="openEnvelope()">
+
+💌
+
+</div>
+
+</div>
+
+<!-- 🌷 ESCENA 2 -->
+
+<div class="scene">
+
+<div class="text" id="text1"></div>
+
+<button onclick="nextScene()">
+
+Continuar 🌷
+
+</button>
+
+</div>
+
+<!-- 🌷 ESCENA 3 -->
+
+<div class="scene" onclick="spawnTulip(event)">
+
+<div class="text" id="text2"></div>
+
+<button onclick="nextScene()">
+
+Continuar
+
+</button>
+
+</div>
+
+<!-- 🌷 ESCENA 4 -->
+
+<div class="scene">
+
+<div class="text" id="text3"></div>
+
+<button onclick="nextScene()">
+
+Continuar
+
+</button>
+
+</div>
+
+<!-- 🌷 ESCENA 5 -->
+
+<div class="scene">
+
+<div class="text" id="text4"></div>
+
+<button onclick="nextScene()">
+
+Continuar
+
+</button>
+
+</div>
+
+<!-- 🌷 ESCENA 6 -->
+
+<div class="scene">
+
+<div class="text" id="text5"></div>
+
+<button onclick="nextScene()">
+
+Continuar
+
+</button>
+
+</div>
+
+<!-- 🌷 ESCENA 7 -->
+
+<div class="scene">
+
+<div class="text">
+
+Porque aunque no pueda estar ahí físicamente…
+
+</div>
+
+<button onclick="nextScene()">
+
+Continuar
+
+</button>
+
+</div>
+
+<!-- 🌷 ESCENA 8 -->
+
+<div class="scene">
+
+<div class="text">
+
+Quiero que sientas que cada flor viene con cariño 🌷
+
+</div>
+
+<button onclick="nextScene()">
+
+Continuar
+
+</button>
+
+</div>
+
+<!-- 🌷 ESCENA 9 -->
+
+<div class="scene">
+
+<div class="text">
+
+Cada pétalo representa un pensamiento bonito hacia ti 💜
+
+</div>
+
+<button onclick="nextScene()">
+
+Continuar
+
+</button>
+
+</div>
+
+<!-- 🌷 ESCENA 10 -->
+
+<div class="scene">
+
+<div class="text">
+
+Cada tulipán guarda una sonrisa que me provocas 🌷
+
+</div>
+
+<button onclick="nextScene()">
+
+Continuar
+
+</button>
+
+</div>
+
+<!-- 🌷 ESCENA 11 -->
+
+<div class="scene">
+
+<div class="text">
+
+Porque cuando pienso en flores…
+
+</div>
+
+<button onclick="activateNightMode()">
+
+Ver algo especial 🌌
+
+</button>
+
+</div>
+
+<!-- 🌷 ESCENA 12 — CORAZÓN -->
+
+<div class="scene">
+
+<div class="heart" id="heart"></div>
+
+<div class="text">
+
+Para ti Katty Machela 🌷  
+Con todo mi cariño 💜  
+
+<br><br>
+
+Claudio 🌷💜
+
+</div>
+
+<button onclick="showSecret()">
+
+Abrir mensaje secreto 💌
+
+</button>
+
+</div>
+
+<!-- 🌷 ESCENA 13 — MENSAJE SECRETO -->
+
+<div class="scene">
+
+<div class="secret" id="secretText">
+
+Ojalá estas flores digitales  
+puedan sacarte una sonrisa 🌷💜
+
+</div>
+
+</div>
+<script>
+
+    /* ============================= */
+    /* ESCENAS */
+    /* ============================= */
+    
+    let scenes = document.querySelectorAll(".scene");
+    let current = 0;
+    
+    function nextScene() {
+    
+    scenes[current].classList.remove("active");
+    
+    current++;
+    
+    if (current < scenes.length) {
+    
+    scenes[current].classList.add("active");
+    
+    }
+    
+    }
+    
+    /* ============================= */
+    /* ABRIR SOBRE */
+    /* ============================= */
+    
+    function openEnvelope() {
+    
+    let env = document.querySelector(".envelope");
+    
+    env.classList.add("open");
+    
+    setTimeout(() => {
+    
+    nextScene();
+    
+    startTyping();
+    
+    }, 900);
+    
+    }
+    
+    /* ============================= */
+    /* ESCRITURA TIPO CARTA */
+    /* ============================= */
+    
+    let phrases = [
+    
+    "Querida Katty Machela",
+    
+    "Sé que no puedo llevarte flores a la casa",
+    
+    "Por lo mismo he estado pensando la forma de poder hacer eso sin que sea un problema para ti en estos momentos",
+    
+    "No me iba a quedar con los brazos cruzados",
+    
+    "Dado eso, te hago esta carta, espero te guste"
+    
+    ];
+    
+    let textIds = [
+    "text1",
+    "text2",
+    "text3",
+    "text4",
+    "text5"
+    ];
+    
+    function startTyping() {
+    
+    phrases.forEach((phrase, i) => {
+    
+    typeWriter(phrase, textIds[i]);
+    
+    });
+    
+    }
+    
+    function typeWriter(text, elementId) {
+    
+    let el = document.getElementById(elementId);
+    
+    let index = 0;
+    
+    function write() {
+    
+    if (index < text.length) {
+    
+    el.innerHTML += text.charAt(index);
+    
+    index++;
+    
+    setTimeout(write, 45);
+    
+    }
+    
+    }
+    
+    write();
+    
+    }
+    
+    /* ============================= */
+    /* CAMPO DE TULIPANES */
+    /* ============================= */
+    
+    function createFieldTulips() {
+    
+    let field = document.getElementById("field");
+    
+    let colors = ["🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷"];
+    
+    for (let i = 0; i < 45; i++) {
+    
+    let tulip = document.createElement("div");
+    
+    tulip.className = "tulip-ground";
+    
+    /* mayor presencia rosada (emoji base) */
+    
+    tulip.innerHTML = colors[Math.floor(Math.random()*colors.length)];
+    
+    tulip.style.left = Math.random() * 100 + "vw";
+    
+    tulip.style.fontSize =
+    20 + Math.random() * 18 + "px";
+    
+    field.appendChild(tulip);
+    
+    }
+    
+    }
+    
+    createFieldTulips();
+    
+    /* ============================= */
+    /* TULIPANES AL TOCAR */
+    /* ============================= */
+    
+    function spawnTulip(event) {
+    
+    let tulip = document.createElement("div");
+    
+    tulip.innerHTML = "🌷";
+    
+    tulip.style.position = "absolute";
+    
+    tulip.style.left =
+    (event.clientX || window.innerWidth/2) + "px";
+    
+    tulip.style.top =
+    (event.clientY || window.innerHeight/2) + "px";
+    
+    tulip.style.fontSize =
+    22 + Math.random()*12 + "px";
+    
+    document.body.appendChild(tulip);
+    
+    setTimeout(() => {
+    
+    tulip.remove();
+    
+    }, 4000);
+    
+    }
+    
+    /* ============================= */
+    /* MODO NOCTURNO REAL */
+    /* ============================= */
+    
+    function activateNightMode() {
+    
+    document.body.style.background =
+    "linear-gradient(to top,#0f2027,#203a43,#2c5364)";
+    
+    /* crear estrellas */
+    
+    for (let i = 0; i < 80; i++) {
+    
+    createStar();
+    
+    }
+    
+    nextScene();
+    
+    }
+    
+    function createStar() {
+    
+    let star = document.createElement("div");
+    
+    star.className = "star";
+    
+    star.innerHTML = "⭐";
+    
+    star.style.left =
+    Math.random() * 100 + "vw";
+    
+    star.style.top =
+    Math.random() * 100 + "vh";
+    
+    document.body.appendChild(star);
+    
+    }
+    
+    /* ============================= */
+    /* CORAZÓN FINAL */
+    /* ============================= */
+    
+    function createHeart() {
+    
+    let heart = document.getElementById("heart");
+    
+    if (!heart) return;
+    
+    heart.innerHTML = "";
+    
+    for (let t = 0; t < 6.28; t += 0.18) {
+    
+    let x =
+    16 * Math.pow(Math.sin(t),3);
+    
+    let y =
+    13 * Math.cos(t)
+    -5*Math.cos(2*t)
+    -2*Math.cos(3*t)
+    -Math.cos(4*t);
+    
+    let flower = document.createElement("div");
+    
+    flower.innerHTML = "🌷";
+    
+    flower.style.position = "absolute";
+    
+    flower.style.left =
+    150 + x*6 + "px";
+    
+    flower.style.top =
+    150 - y*6 + "px";
+    
+    heart.appendChild(flower);
+    
+    }
+    
+    /* latido */
+    
+    setInterval(() => {
+    
+    heart.style.transform = "scale(1.08)";
+    
+    setTimeout(()=>{
+    
+    heart.style.transform = "scale(1)";
+    
+    },300);
+    
+    },900);
+    
+    }
+    
+    /* activar corazón automáticamente */
+    
+    setTimeout(createHeart, 2000);
+    
+    /* ============================= */
+    /* MENSAJE SECRETO */
+    /* ============================= */
+    
+    function showSecret() {
+    
+    nextScene();
+    
+    let secret =
+    document.getElementById("secretText");
+    
+    secret.style.display = "block";
+    
+    }
+    
+    /* ============================= */
+    /* MÚSICA */
+    /* ============================= */
+    
+    window.addEventListener("click", () => {
+    
+    let music =
+    document.getElementById("music");
+    
+    music.volume = 0.35;
+    
+    music.play().catch(()=>{});
+    
+    }, { once: true });
+    
+    </script>
+    
+    </body>
+    </html>
